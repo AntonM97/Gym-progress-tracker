@@ -1,0 +1,16 @@
+-- Table: person
+CREATE TABLE person (
+    id SERIAL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Table: records
+CREATE TABLE records (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    notes TEXT NOT NULL,
+    date DATE NOT NULL,
+    person_id INT NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE
+);
