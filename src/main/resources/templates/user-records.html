@@ -9,97 +9,97 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <style>
-	:root {
-		--bg-light: #e8f1f2;
-		--bg-dark: #15171f;
-		--text-light: #15171f;
-		--text-dark: #e8f1f2;
-		--primary-color: #ffbc03;
-	}
-	
-	body {
-		background-color: var(--bg-light);
-		color: var(--text-light);
-		transition: background-color 0.3s, color 0.3s;
-	}
-	
-	body.dark-theme {
-		background-color: var(--bg-dark);
-		color: var(--text-dark);
-	}
-	
-	.fixed-top-bar {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 1000;
-		background-color: var(--primary-color);
-		padding: 10px;
-		display: flex;
-		justify-content: space-around;
-	}
-	
-	.fixed-top-bar button {
-		color: white;
-		background-color: transparent;
-		border: 2px solid white; /* Add border */
-		border-radius: 5px; /* Rounded corners */
-		padding: 8px 16px; /* Add padding */
-		font-size: 16px;
-		cursor: pointer; /* Change cursor to pointer */
-		transition: background-color 0.3s, border-color 0.3s;
-	}
-	
-	.main-content {
-		margin-top: 60px; /* Offset for fixed top bar */
-		padding: 20px;
-	}
-	
-	.record-date {
-		text-align: center;
-		margin: 20px 0;
-		font-size: 18px;
-		font-weight: bold;
-	}
-	
-	.record-item {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 10px;
-		margin: 10px 0;
-		background-color: rgba(255, 255, 255, 0.1);
-		border-radius: 5px;
-	}
-	
-	.record-item.dark-theme {
-		background-color: rgba(0, 0, 0, 0.1);
-	}
-	
-	.add-record-btn {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		width: 100%;
-		padding: 15px;
-		background-color: var(--primary-color);
-		color: white;
-		border: none;
-		font-size: 18px;
-		text-align: center;
-	}
-	
-	.add-record-btn:hover {
-		background-color: #1481c2;
-	}
-	
-	.edit-btn {
-		color: var(--primary-color);
-		background-color: transparent;
-		border: none;
-		font-size: 14px;
+:root {
+	--bg-light: #e8f1f2;
+	--bg-dark: #15171f;
+	--text-light: #15171f;
+	--text-dark: #e8f1f2;
+	--primary-color: #ffbc03;
+}
+
+body {
+	background-color: var(--bg-light);
+	color: var(--text-light);
+	transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme {
+	background-color: var(--bg-dark);
+	color: var(--text-dark);
+}
+
+.fixed-top-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	background-color: var(--primary-color);
+	padding: 10px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.fixed-top-bar button {
+	color: white;
+	background-color: transparent;
+	border: 2px solid white; /* Add border */
+	border-radius: 5px; /* Rounded corners */
+	padding: 8px 16px; /* Add padding */
+	font-size: 16px;
+	cursor: pointer; /* Change cursor to pointer */
+	transition: background-color 0.3s, border-color 0.3s;
+}
+
+.main-content {
+	margin-top: 60px; /* Offset for fixed top bar */
+	padding: 20px;
+}
+
+.record-date {
+	text-align: center;
+	margin: 20px 0;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.record-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	margin: 10px 0;
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 5px;
+}
+
+.record-item.dark-theme {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.add-record-btn {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	padding: 15px;
+	background-color: var(--primary-color);
+	color: white;
+	border: none;
+	font-size: 18px;
+	text-align: center;
+}
+
+.add-record-btn:hover {
+	background-color: #1481c2;
+}
+
+.edit-btn {
+	color: var(--primary-color);
+	background-color: transparent;
+	border: none;
+	font-size: 14px;
 }
 </style>
 </head>
@@ -114,22 +114,17 @@
 
 	<!-- Main Content -->
 	<div class="main-content">
-		<!-- Example Record Group -->
-		<div class="record-date">2023-10-15</div>
-		<div class="record-item">
-			<span>Did bench press and squats today.</span>
-			<button class="edit-btn">Edit</button>
-		</div>
-		<div class="record-item">
-			<span>Ran 5km in the morning.</span>
-			<button class="edit-btn">Edit</button>
-		</div>
+		<div th:each="entry : ${notesByDate}">
 
-		<!-- Another Record Group -->
-		<div class="record-date">2023-10-14</div>
-		<div class="record-item">
-			<span>Weight training session.</span>
-			<button class="edit-btn">Edit</button>
+			<!-- Date header -->
+			<div class="record-date" th:text="${entry.key}"></div>
+
+			<!-- Notes under that date -->
+			<div th:each="record : ${entry.value}" class="record-item">
+				<span th:text="${record.notes}"></span>
+				<button class="edit-btn">Edit</button>
+			</div>
+
 		</div>
 	</div>
 
