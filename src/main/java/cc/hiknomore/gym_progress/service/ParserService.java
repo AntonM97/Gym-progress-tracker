@@ -7,7 +7,13 @@ public class ParserService {
     
     public ParserService() {}
     
-    public void parseTextInput() {
+    public void parseTextInput(String record) {
+        
+        if(record.contains(record)) {
+            
+        }
+        
+        
         
     }
 
