@@ -1,13 +1,20 @@
 spring:
+  
   application:
     name: gym-progress
-
-
+  
   jpa:
     database: POSTGRESQL
     show-sql: true
+  
   datasource:
     url: jdbc:postgresql://localhost:5433/gym_progress
     username: postgres
     password: password
     driverClassName: org.postgresql.Driver
+  
+    
+      
+server:
+  
+  port: 50000
