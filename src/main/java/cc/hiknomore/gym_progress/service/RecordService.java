@@ -22,5 +22,11 @@ public class RecordService {
         LocalDate to = LocalDate.now();
         return recordRepository.findByDateBetween(id, from, to);
     }
+    
+    public void saveRecord(Record record) {
+        if(record != null) {
+            recordRepository.save(record);
+        }
+    }
 
 }
