@@ -15,4 +15,4 @@ spring:
 
     
 server:
-  port: 50000
+  port: 50001
