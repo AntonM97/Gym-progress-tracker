@@ -2,7 +2,7 @@ spring:
   
   application:
     name: gym-progress
-  
+
   jpa:
     database: POSTGRESQL
     show-sql: true
@@ -12,9 +12,7 @@ spring:
     username: postgres
     password: password
     driverClassName: org.postgresql.Driver
-  
+
     
-      
 server:
-  
   port: 50000

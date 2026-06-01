@@ -25,15 +25,19 @@ public class RecordController {
         this.recordService = recordService;
     }
 
-    @GetMapping("/@{id}")
+    @GetMapping("/{id}")
     public String showRecords(@PathVariable Long id, Model model) {//TODO add empty record object
         List<Record> records = recordService.getWeeklyRecords(id.longValue());
 
         Record record = new Record();
+        
         Map<LocalDate, List<Record>> notesByDate = records.stream()
-                .collect(Collectors.groupingBy(Record::getDate, TreeMap::new, Collectors.toList()));
-
+                .collect(Collectors.groupingBy(
+                        Record::getDate, 
+                        TreeMap::new, 
+                        Collectors.toList()));
         model.addAttribute("notesByDate", notesByDate);
+        
         return "user-records";
     }
 //    @PostMapping("/save")
